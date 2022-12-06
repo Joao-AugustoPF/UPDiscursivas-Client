@@ -90,11 +90,7 @@ export default function Nav() {
 
       //Why use GraphQLClient instead of Apollo? As we have the protected routes, the apollo query wasn't returning properly. So we had to use graphql-request with the headers
       const graphcms = new GraphQLClient(
-        `${
-          process.env.NODE_ENV === "production"
-            ? process.env.NEXT_PUBLIC_BACKEND_URL
-            : process.env.NEXT_PUBLIC_API_URL
-        }/graphql`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
         {
           headers: {
             Authorization: `Bearer ${session?.jwt}`

@@ -151,11 +151,7 @@ async function Webhook(req, res) {
         console.log(usuario);
       } else if (data.status === "active") {
         const usuario = await axios.post(
-          `${
-            process.env.NODE_ENV === "production"
-              ? process.env.NEXT_PUBLIC_BACKEND_URL
-              : process.env.NEXT_PUBLIC_API_URL
-          }/graphql`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
           {
             query: print(QURI),
             variables: {

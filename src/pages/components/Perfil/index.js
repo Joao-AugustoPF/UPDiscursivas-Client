@@ -30,7 +30,7 @@ export default function Perfil({ session }) {
     if (idPhoto) {
       axios
         .post(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/upload?id=${idPhoto}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/upload?id=${idPhoto}`,
           formData,
           {
             headers: {
@@ -78,7 +78,7 @@ export default function Perfil({ session }) {
     const handleImg = async () => {
       //Why use GraphQLClient instead of Apollo? As we have the protected routes, the apollo query wasn't returning properly. So we had to use graphql-request with the headers
       const graphcms = new GraphQLClient(
-        `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
         {
           headers: {
             Authorization: `Bearer ${session?.jwt}`
@@ -100,7 +100,7 @@ export default function Perfil({ session }) {
       ) {
         //Sets the photo to UseState which is then used in the frontend
         setPhoto(
-          `${process.env.NEXT_PUBLIC_API_URL}${data?.usersPermissionsUsers.data[0]?.attributes?.photo?.data?.attributes?.url}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}${data?.usersPermissionsUsers.data[0]?.attributes?.photo?.data?.attributes?.url}`
         );
         return;
         //-----------------------------------
