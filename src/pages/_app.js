@@ -1,8 +1,8 @@
 import Head from "next/head";
 import GlobalStyles from "../styles/global";
 import Footer from "./components/Footer";
-import Nav from "./components/NavBar";
 import NextNprogress from "nextjs-progressbar";
+import NavBar from "../pages/components/NavBar2/index";
 import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "../utils/apollo";
 import { SessionProvider } from "next-auth/react";
@@ -39,7 +39,7 @@ function App({ Component, pageProps }) {
             stopDelayMs={200}
             height={3}
           />
-          <Nav />
+          <NavBar />
           <Component {...pageProps} />
           <Footer />
         </ApolloProvider>

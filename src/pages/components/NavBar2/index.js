@@ -1,50 +1,41 @@
 /* eslint-disable no-undef */
-import Img from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { signOut, useSession } from "next-auth/react";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import { QueryUser } from "../../../graphql/queries/user";
+import { useMutation } from "@apollo/client";
 import Logout from "@mui/icons-material/Logout";
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Tooltip
+} from "@mui/material";
+import { Box } from "@mui/system";
+import { GraphQLClient } from "graphql-request";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import * as S from "../../../lib/NavBar/styles";
+import { useEffect, useState } from "react";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import Navbar from "react-bootstrap/Navbar";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import { MutationRegisterTrial } from "../../../graphql/mutations/registerBilling";
 import Logo from "../../../../public/img/logo.png";
-import { useRouter } from "next/router";
-import { useMutation } from "@apollo/client";
-import { GraphQLClient } from "graphql-request";
 
-export default function Nav() {
-  //Get the user logged Session
-  const { data: session } = useSession();
-
-  const navigate = useRouter();
+export default function ResponsiveExample() {
+  const [show, setShow] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [photo, setPhoto] = useState();
 
-  //Check if the user has clicked on his profile photo and it's with options "My profile" and "Leave" open
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const { data: session } = useSession();
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  //---------------------------------------------
-
-  //Check if the user has clicked on the option "My profile" and send it to the profile page
-  const handleProfile = () => {
-    handleClose();
-    navigate.push("/perfil");
-  };
-  //---------------------------------------------
   const [createRegisterTrial] = useMutation(MutationRegisterTrial);
 
   useEffect(() => {
@@ -120,57 +111,37 @@ export default function Nav() {
       isActive();
     }
   }, [session, createRegisterTrial]);
+
   return (
     <>
-      <nav className="navbar bg-light navbar-expand-lg bg-light py-2">
-        <div className="container-fluid">
-          <Link className="navbar-brand" href="/" passHref>
-            <a>
-              <Img src={Logo} alt="Bootstrap" width="70" height="70" />
+      <S.ContainerOusite>
+        <Navbar bg="light" variant="light" expand={true}>
+          <S.MenuImageToggle>
+            <a href="/" className="ms-5">
+              <Image src={Logo} width="100" height="100" />
             </a>
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div
-            className="offcanvas offcanvas-end"
-            tabIndex="-1"
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel"
-          >
-            <div className="offcanvas-header">
-              <Link className="navbar-brand" href="/" passHref>
-                <a>
-                  <Img src={Logo} alt="Bootstrap" width="70" height="70" />
-                </a>
-              </Link>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="offcanvas-body">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-white mx-4">
+          </S.MenuImageToggle>
+
+          <Offcanvas show={show} onHide={handleClose} responsive="lg">
+            <Offcanvas.Header closeButton>
+              <a href="/">
+                <Image src={Logo} alt="Bootstrap" width="70" height="70" />
+              </a>
+              <Offcanvas.Title>UP Discursivas</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body className="ms-5">
+              <ul className="navbar-nav ms-5">
                 <li className="nav-item mx-1 mt-2">
-                  <Link href="/assinaturas" passHref>
-                    <a
-                      className="text-decoration-none"
-                      style={{
-                        fontWeight: "500",
-                        color: "#d10d35"
-                      }}
-                    >
-                      Assinar
-                    </a>
-                  </Link>
+                  <a
+                    className="text-decoration-none"
+                    style={{
+                      fontWeight: "500",
+                      color: "#d10d35"
+                    }}
+                    href="/assinaturas"
+                  >
+                    Assinar
+                  </a>
                 </li>
                 <li className="nav-item mx-1 mt-2">
                   <a
@@ -197,17 +168,16 @@ export default function Nav() {
                   </a>
                 </li>
                 <li className="nav-item mx-1 mt-2">
-                  <Link className="navlink mx-1" href="/sobre" passHref>
-                    <a
-                      className="text-decoration-none"
-                      style={{
-                        fontWeight: "500",
-                        color: "#d10d35"
-                      }}
-                    >
-                      Sobre
-                    </a>
-                  </Link>
+                  <a
+                    className="text-decoration-none"
+                    style={{
+                      fontWeight: "500",
+                      color: "#d10d35"
+                    }}
+                    href="/sobre"
+                  >
+                    Sobre
+                  </a>
                 </li>
               </ul>
               {session && (
@@ -302,26 +272,38 @@ export default function Nav() {
                   {session.username}
                 </p>
               ) : (
-                <div className="mt-2">
-                  <Link href="/login" passHref>
-                    <button className="btn btn-success">Logar</button>
-                  </Link>
-                  <Link href="/registrar" passHref>
-                    <button
-                      className="btn btn-success btn me-5 ms-3 gradient-custom-2"
-                      style={{
-                        BackgroundColor: "#d10d35"
-                      }}
-                    >
-                      Registrar
-                    </button>
-                  </Link>
-                </div>
+                <S.ToggleAuthOff>
+                  <a href="/login">
+                    <button className="btn btn-success me-2">Logar</button>
+                  </a>
+                  <a href="/registrar">
+                    <button className="btn btn-success me-2">Registrar</button>
+                  </a>
+                </S.ToggleAuthOff>
               )}
-            </div>
-          </div>
-        </div>
-      </nav>
+            </Offcanvas.Body>
+          </Offcanvas>
+        </Navbar>
+        {session ? (
+          <p className="mt-2 me-5 ms-3 gradient-custom-2">{session.username}</p>
+        ) : (
+          <S.AuthToggle>
+            <a href="/login">
+              <button className="btn btn-success me-2">Logar</button>
+            </a>
+            <a href="/registrar">
+              <button className="btn btn-success me-2">Registrar</button>
+            </a>
+          </S.AuthToggle>
+        )}
+        <S.MenuToggle>
+          <MenuRoundedIcon
+            color="error"
+            fontSize="large"
+            onClick={handleShow}
+          />
+        </S.MenuToggle>
+      </S.ContainerOusite>
     </>
   );
 }

@@ -24,7 +24,6 @@ export const BannerContainerLeft = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: -300px;
   }
 `;
 
@@ -58,7 +57,8 @@ export const LeftBasement = styled.div`
 
   @media (max-width: 990px) {
     width: 100%;
-
+    height: 300px;
+    margin-top: 500px;
     flex-direction: column;
   }
 `;

@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "../../../../lib/Main/TeamContainer/styles";
+import * as S from "../../../../lib/Main/Banner/TeamContainer/styles";
 import Image from "next/image";
 import person from "../../../../../public/img/v3_0105443.jpg";
 import hero from "../../../../../public/img/hero-bg.png";
