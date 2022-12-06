@@ -79,6 +79,10 @@ export const LeftInsideButton = styled.div`
 export const TextTitle = styled.h1`
   font-size: 55px;
   margin-bottom: 8%;
+
+  @media (max-width: 990px) {
+    font-size: 35px;
+  }
 `;
 
 export const TextDescription = styled.h2`
@@ -91,4 +95,8 @@ export const RightBasement = styled.div`
   justify-content: center;
   align-items: center;
   height: 800px;
+
+  @media (max-width: 990px) {
+    display: none;
+  }
 `;

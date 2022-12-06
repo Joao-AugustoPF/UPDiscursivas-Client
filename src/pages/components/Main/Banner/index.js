@@ -32,7 +32,7 @@ export const Banner = () => {
           </S.BannerContainerLeft>
           <S.BannerContainerRight>
             <S.RightBasement>
-              <Img src={Man} alt="Los Angeles" width="650px" height="650px" />;
+              <Img src={Man} alt="Los Angeles" width="100%" height="100%" />;
             </S.RightBasement>
           </S.BannerContainerRight>
         </S.ContainerAll>

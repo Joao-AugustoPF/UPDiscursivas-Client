@@ -41,6 +41,10 @@ export const BoxProdutorImage = styled.div`
   height: 300px;
   background: gray;
   margin: auto;
+
+  @media (max-width: 960px) {
+    width: 100px;
+  }
 `;
 
 export const ProdutorInfo = styled.div`
@@ -54,6 +58,10 @@ export const ProdutorInfo = styled.div`
   box-shadow: 0px 2px 15px rgb(0 0 0 / 10%);
   transition: max-height 0.5s ease-in-out;
   margin-top: 250px;
+
+  @media (max-width: 960px) {
+    width: 120px;
+  }
 `;
 
 export const ContainerGrid = styled.div`
