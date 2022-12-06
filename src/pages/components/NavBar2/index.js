@@ -36,6 +36,11 @@ export default function ResponsiveExample() {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleProfile = () => {
+    handleClose();
+    navigate.push("/perfil");
+  };
+
   const [createRegisterTrial] = useMutation(MutationRegisterTrial);
 
   useEffect(() => {
