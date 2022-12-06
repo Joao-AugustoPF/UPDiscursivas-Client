@@ -86,8 +86,6 @@ export default function Nav() {
       }
     };
     const handleImg = async () => {
-      const billing = session?.billingID;
-
       //Why use GraphQLClient instead of Apollo? As we have the protected routes, the apollo query wasn't returning properly. So we had to use graphql-request with the headers
       const graphcms = new GraphQLClient(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
@@ -98,6 +96,7 @@ export default function Nav() {
         }
       );
       //---------------------------------------------
+      const billing = session?.billingID;
 
       //Gets the user information based on your billingID
       const data = await graphcms.request(QueryUser, { billing });
@@ -105,12 +104,12 @@ export default function Nav() {
 
       //Checks if the user already has photo in the backend
       if (
-        data?.usersPermissionsUsers?.data[0]?.attributes?.photo?.data
-          ?.attributes?.url
+        data?.usersPermissionsUsers.data[0]?.attributes?.photo?.data?.attributes
+          ?.url
       ) {
         //Sets the photo to UseState which is then used in the frontend
         setPhoto(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}${data?.usersPermissionsUsers?.data[0]?.attributes?.photo?.data?.attributes?.url}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}${data?.usersPermissionsUsers.data[0]?.attributes?.photo?.data?.attributes?.url}`
         );
         //---------------------------------------------
         return;
