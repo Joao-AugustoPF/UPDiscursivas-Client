@@ -224,10 +224,9 @@ export default function Nav() {
                       >
                         {photo ? (
                           <Avatar sx={{ width: 32, height: 32 }}>
-                            <Img
+                            <img
                               src={photo}
                               alt="imagem de um avatar"
-                              layout="fill"
                               width="100%"
                               height="100%"
                             />
@@ -276,7 +275,7 @@ export default function Nav() {
                     <MenuItem onClick={handleProfile}>
                       {photo ? (
                         <Avatar sx={{ width: 32, height: 32 }}>
-                          <Img
+                          <img
                             src={photo}
                             alt="imagem de um avatar"
                             width="100%"
