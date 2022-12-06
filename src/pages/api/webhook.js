@@ -46,11 +46,7 @@ async function Webhook(req, res) {
   }
   const data = event.data.object;
   const users = await axios.get(
-    `${
-      process.env.NODE_ENV === "production"
-        ? process.env.NEXT_PUBLIC_BACKEND_URL
-        : process.env.NEXT_PUBLIC_API_URL
-    }/api/users`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users`
   );
 
   let user = "";
@@ -85,11 +81,7 @@ async function Webhook(req, res) {
           typeSubscription = "trimestral";
         }
         const usuario = await axios.post(
-          `${
-            process.env.NODE_ENV === "production"
-              ? process.env.NEXT_PUBLIC_BACKEND_URL
-              : process.env.NEXT_PUBLIC_API_URL
-          }/graphql`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
           {
             query: print(QURI),
             variables: {
@@ -124,11 +116,7 @@ async function Webhook(req, res) {
       }
 
       const usuario = await axios.post(
-        `${
-          process.env.NODE_ENV === "production"
-            ? process.env.NEXT_PUBLIC_BACKEND_URL
-            : process.env.NEXT_PUBLIC_API_URL
-        }/graphql`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
         {
           query: print(QURI),
           variables: {
@@ -147,11 +135,7 @@ async function Webhook(req, res) {
 
       if (isOnTrial) {
         const usuario = await axios.post(
-          `${
-            process.env.NODE_ENV === "production"
-              ? process.env.NEXT_PUBLIC_BACKEND_URL
-              : process.env.NEXT_PUBLIC_API_URL
-          }/graphql`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
           {
             query: print(QURI),
             variables: {
@@ -192,11 +176,7 @@ async function Webhook(req, res) {
           "You just canceled the subscription -> " + data.canceled_at
         );
         const usuario = await axios.post(
-          `${
-            process.env.NODE_ENV === "production"
-              ? process.env.NEXT_PUBLIC_BACKEND_URL
-              : process.env.NEXT_PUBLIC_API_URL
-          }/graphql`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
           {
             query: print(QURI),
             variables: {

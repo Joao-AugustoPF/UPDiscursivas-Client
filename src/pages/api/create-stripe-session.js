@@ -16,8 +16,8 @@ async function CreateStripeSession(req, res) {
     payment_method_types: ["card", "boleto"],
     line_items: [{ price: param, quantity: 1 }],
     mode: "subscription",
-    success_url: `${process.env.NEXT_PUBLIC_AUTH_API_URL}/perfil`,
-    cancel_url: `${process.env.NEXT_PUBLIC_AUTH_API_URL}/`
+    success_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/perfil`,
+    cancel_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/`
   });
   res.json({ id: session.id, billingID: customerid, keyword: keyword });
 }

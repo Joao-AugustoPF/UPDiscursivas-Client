@@ -57,18 +57,11 @@ export const FormResetPassword = () => {
 
     //Send the url of reset-password to the backend
     axios
-      .post(
-        `${
-          process.env.NODE_ENV === "production"
-            ? process.env.NEXT_PUBLIC_BACKEND_URL
-            : process.env.NEXT_PUBLIC_API_URL
-        }/api/auth/reset-password`,
-        {
-          code: query.code,
-          password: values.password.target.value,
-          passwordConfirmation: values.confirm_password.target.value
-        }
-      )
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/reset-password`, {
+        code: query.code,
+        password: values.password.target.value,
+        passwordConfirmation: values.confirm_password.target.value
+      })
       .then((response) => {
         console.log("A senha do seu usuário foi redefinida.");
         signIn("credentials", {

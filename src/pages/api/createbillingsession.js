@@ -7,7 +7,7 @@ const createBillingSession = async (req, res) => {
   } = req;
   const session = await stripe.billingPortal.sessions.create({
     customer,
-    return_url: `${process.env.NEXT_PUBLIC_AUTH_API_URL}`
+    return_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}`
   });
   res.json({ session: session });
 };

@@ -50,19 +50,11 @@ export default function Perfil({ session }) {
 
     //Creates a photo in the backend if the user hasn't photo yet.
     axios
-      .post(
-        `${
-          process.env.NODE_ENV === "production"
-            ? process.env.NEXT_PUBLIC_BACKEND_URL
-            : process.env.NEXT_PUBLIC_API_URL
-        }/api/upload/`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${session?.jwt}`
-          }
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/upload/`, formData, {
+        headers: {
+          Authorization: `Bearer ${session?.jwt}`
         }
-      )
+      })
       .then(async (response) => {
         await setUserPhoto({
           variables: {

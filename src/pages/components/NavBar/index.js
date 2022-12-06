@@ -114,14 +114,7 @@ export default function Nav() {
       ) {
         //Sets the photo to UseState which is then used in the frontend
         setPhoto(
-          `${
-            process.env.NODE_ENV === "production"
-              ? process.env.NEXT_PUBLIC_BACKEND_URL
-              : process.env.NEXT_PUBLIC_API_URL
-          }${
-            data?.usersPermissionsUsers?.data[0]?.attributes?.photo?.data
-              ?.attributes?.url
-          }`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}${data?.usersPermissionsUsers?.data[0]?.attributes?.photo?.data?.attributes?.url}`
         );
         //---------------------------------------------
         return;

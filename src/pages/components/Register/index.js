@@ -79,7 +79,7 @@ export const Register = () => {
     //Gets the user info that was created before
     try {
       customerInfo = await axios.post(
-        `${process.env.NEXT_PUBLIC_AUTH_API_URL}/api/customerstripe/?email=${values.email.target.value}&name=${values.username.target.value}`
+        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/customerstripe/?email=${values.email.target.value}&name=${values.username.target.value}`
       );
 
       //Creates the user in the backend
