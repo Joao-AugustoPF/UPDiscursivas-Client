@@ -43,7 +43,7 @@ export const BoxProdutorImage = styled.div`
   margin: auto;
 
   @media (max-width: 960px) {
-    width: 100px;
+    width: 200px;
   }
 `;
 
@@ -60,7 +60,7 @@ export const ProdutorInfo = styled.div`
   margin-top: 250px;
 
   @media (max-width: 960px) {
-    width: 120px;
+    width: 200px;
   }
 `;
 
