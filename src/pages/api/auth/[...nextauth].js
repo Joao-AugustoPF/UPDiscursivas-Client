@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { signIn } from "../../../services/auth";
@@ -66,7 +67,8 @@ export const authOptions = {
       }
       return Promise.resolve(token);
     }
-  }
+  },
+  secret: process.env.NEXTAUTH_SECRET
 };
 
 export default NextAuth(authOptions);
