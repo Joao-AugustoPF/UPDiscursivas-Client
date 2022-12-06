@@ -68,4 +68,7 @@ export const ContainerGrid = styled.div`
   display: flex;
   padding: 50px;
   justify-content: center;
+  @media (max-width: 960px) {
+    padding: 0;
+  }
 `;
