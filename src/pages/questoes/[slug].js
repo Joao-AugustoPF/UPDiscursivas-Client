@@ -170,7 +170,14 @@ export default function Questão(props) {
                   className="btn btn-info text-white"
                   onClick={() =>
                     download(
-                      `${process.env.NEXT_PUBLIC_API_URL}${provas?.perguntas?.attributes?.pdf?.data?.attributes?.url}`,
+                      `${
+                        process.env.NODE_ENV === "production"
+                          ? process.env.NEXT_PUBLIC_BACKEND_URL
+                          : process.env.NEXT_PUBLIC_API_URL
+                      }${
+                        provas?.perguntas?.attributes?.pdf?.data?.attributes
+                          ?.url
+                      }`,
                       `${provas?.perguntas?.attributes?.title}.pdf`
                     )
                   }

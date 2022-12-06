@@ -34,9 +34,16 @@ export const FormForgotPassword = () => {
 
     //Send the url of forgot-password to the backend
     axios
-      .post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/forgot-password`, {
-        email: values.email.target.value // user's email
-      })
+      .post(
+        `${
+          process.env.NODE_ENV === "production"
+            ? process.env.NEXT_PUBLIC_BACKEND_URL
+            : process.env.NEXT_PUBLIC_API_URL
+        }/api/auth/forgot-password`,
+        {
+          email: values.email.target.value // user's email
+        }
+      )
       .then(() => {
         console.log("O usuário recebeu um email!");
         setSuccess(true);

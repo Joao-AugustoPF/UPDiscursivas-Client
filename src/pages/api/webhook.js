@@ -45,7 +45,13 @@ async function Webhook(req, res) {
     return;
   }
   const data = event.data.object;
-  const users = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users`);
+  const users = await axios.get(
+    `${
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_BACKEND_URL
+        : process.env.NEXT_PUBLIC_API_URL
+    }/api/users`
+  );
 
   let user = "";
   users.data.map((value) => {
@@ -79,7 +85,11 @@ async function Webhook(req, res) {
           typeSubscription = "trimestral";
         }
         const usuario = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
+          `${
+            process.env.NODE_ENV === "production"
+              ? process.env.NEXT_PUBLIC_BACKEND_URL
+              : process.env.NEXT_PUBLIC_API_URL
+          }/graphql`,
           {
             query: print(QURI),
             variables: {
@@ -114,7 +124,11 @@ async function Webhook(req, res) {
       }
 
       const usuario = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
+        `${
+          process.env.NODE_ENV === "production"
+            ? process.env.NEXT_PUBLIC_BACKEND_URL
+            : process.env.NEXT_PUBLIC_API_URL
+        }/graphql`,
         {
           query: print(QURI),
           variables: {
@@ -133,7 +147,11 @@ async function Webhook(req, res) {
 
       if (isOnTrial) {
         const usuario = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
+          `${
+            process.env.NODE_ENV === "production"
+              ? process.env.NEXT_PUBLIC_BACKEND_URL
+              : process.env.NEXT_PUBLIC_API_URL
+          }/graphql`,
           {
             query: print(QURI),
             variables: {
@@ -149,7 +167,11 @@ async function Webhook(req, res) {
         console.log(usuario);
       } else if (data.status === "active") {
         const usuario = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
+          `${
+            process.env.NODE_ENV === "production"
+              ? process.env.NEXT_PUBLIC_BACKEND_URL
+              : process.env.NEXT_PUBLIC_API_URL
+          }/graphql`,
           {
             query: print(QURI),
             variables: {
@@ -170,7 +192,11 @@ async function Webhook(req, res) {
           "You just canceled the subscription -> " + data.canceled_at
         );
         const usuario = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
+          `${
+            process.env.NODE_ENV === "production"
+              ? process.env.NEXT_PUBLIC_BACKEND_URL
+              : process.env.NEXT_PUBLIC_API_URL
+          }/graphql`,
           {
             query: print(QURI),
             variables: {

@@ -8,7 +8,11 @@ let apolloClient;
 //Set the apollo url to the correct URL
 function createApolloClient(session) {
   const httpLink = new HttpLink({
-    uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`
+    uri: `${
+      process.env.process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_BACKEND_URL
+        : process.env.NEXT_PUBLIC_API_URL
+    }/graphql`
   });
 
   const authLink = setContext((_, { headers }) => {

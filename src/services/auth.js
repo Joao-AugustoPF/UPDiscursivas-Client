@@ -1,5 +1,8 @@
 /* eslint-disable no-undef */
-const strapiUrl = process.env.NEXT_PUBLIC_API_URL;
+const strapiUrl =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_BACKEND_URL
+    : process.env.NEXT_PUBLIC_API_URL;
 
 import axios from "axios";
 

@@ -90,7 +90,11 @@ export default function Nav() {
 
       //Why use GraphQLClient instead of Apollo? As we have the protected routes, the apollo query wasn't returning properly. So we had to use graphql-request with the headers
       const graphcms = new GraphQLClient(
-        `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
+        `${
+          process.env.NODE_ENV === "production"
+            ? process.env.NEXT_PUBLIC_BACKEND_URL
+            : process.env.NEXT_PUBLIC_API_URL
+        }/graphql`,
         {
           headers: {
             Authorization: `Bearer ${session?.jwt}`
@@ -110,7 +114,14 @@ export default function Nav() {
       ) {
         //Sets the photo to UseState which is then used in the frontend
         setPhoto(
-          `${process.env.NEXT_PUBLIC_API_URL}${data?.usersPermissionsUsers?.data[0]?.attributes?.photo?.data?.attributes?.url}`
+          `${
+            process.env.NODE_ENV === "production"
+              ? process.env.NEXT_PUBLIC_BACKEND_URL
+              : process.env.NEXT_PUBLIC_API_URL
+          }${
+            data?.usersPermissionsUsers?.data[0]?.attributes?.photo?.data
+              ?.attributes?.url
+          }`
         );
         //---------------------------------------------
         return;
