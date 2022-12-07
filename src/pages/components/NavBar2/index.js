@@ -19,8 +19,10 @@ import { useEffect, useState } from "react";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { QueryUser } from "../../../graphql/queries/user";
 import { MutationRegisterTrial } from "../../../graphql/mutations/registerBilling";
 import Logo from "../../../../public/img/logo.png";
+import { useRouter } from "next/router";
 
 export default function ResponsiveExample() {
   const [show, setShow] = useState(false);
@@ -28,6 +30,8 @@ export default function ResponsiveExample() {
   const [photo, setPhoto] = useState();
 
   const { data: session } = useSession();
+
+  const navigate = useRouter();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
