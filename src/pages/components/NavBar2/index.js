@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { GraphQLClient } from "graphql-request";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import * as S from "../../../lib/NavBar/styles";
 import { useEffect, useState } from "react";
