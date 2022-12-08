@@ -29,11 +29,14 @@ export default function ResponsiveExample() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [photo, setPhoto] = useState();
 
+  const open = Boolean(anchorEl);
+
   const { data: session } = useSession();
 
   const navigate = useRouter();
 
-  const handleClose = () => setShow(false);
+  const handleCloseMenu = () => setShow(false);
+  const handleClose = () => setAnchorEl(null);
   const handleShow = () => setShow(true);
 
   const handleClick = (event) => {
@@ -124,14 +127,13 @@ export default function ResponsiveExample() {
   return (
     <>
       <S.ContainerOusite>
-        <Navbar bg="light" variant="light" expand={true}>
-          <S.MenuImageToggle>
-            <a href="/" className="ms-5">
-              <Image src={Logo} width="100" height="100" />
-            </a>
-          </S.MenuImageToggle>
-
-          <Offcanvas show={show} onHide={handleClose} responsive="lg">
+        <S.MenuImageToggle>
+          <a href="/" className="ms-5">
+            <Image src={Logo} width="100" height="100" />
+          </a>
+        </S.MenuImageToggle>
+        <S.LateralMenu>
+          <Offcanvas show={show} onHide={handleCloseMenu} responsive="lg">
             <Offcanvas.Header closeButton>
               <a href="/">
                 <Image src={Logo} alt="Bootstrap" width="70" height="70" />
@@ -189,7 +191,7 @@ export default function ResponsiveExample() {
                   </a>
                 </li>
               </ul>
-              {session && (
+              {session ? (
                 <>
                   <Box className="extended-profile">
                     <Tooltip title="Acessar perfil">
@@ -221,7 +223,6 @@ export default function ResponsiveExample() {
                     id="account-menu"
                     open={open}
                     onClose={handleClose}
-                    onClick={handleClose}
                     PaperProps={{
                       elevation: 0,
                       sx: {
@@ -274,27 +275,117 @@ export default function ResponsiveExample() {
                       Sair
                     </MenuItem>
                   </Menu>
-                </>
-              )}
-              {session ? (
-                <p className="mt-2 me-5 ms-3 gradient-custom-2">
                   {session.username}
-                </p>
+                </>
               ) : (
-                <S.ToggleAuthOff>
-                  <a href="/login">
-                    <button className="btn btn-success me-2">Logar</button>
-                  </a>
-                  <a href="/registrar">
-                    <button className="btn btn-success me-2">Registrar</button>
-                  </a>
-                </S.ToggleAuthOff>
+                <>
+                  <S.ToggleAuthOff>
+                    <a href="/login">
+                      <button className="btn btn-success me-2">Logar</button>
+                    </a>
+                    <a href="/registrar">
+                      <button className="btn btn-success me-2">
+                        Registrar
+                      </button>
+                    </a>
+                  </S.ToggleAuthOff>
+                </>
               )}
             </Offcanvas.Body>
           </Offcanvas>
-        </Navbar>
+        </S.LateralMenu>
+
         {session ? (
-          <p className="mt-2 me-5 ms-3 gradient-custom-2">{session.username}</p>
+          <>
+            <S.MenuAvatar>
+              <Box className="extended-profile mt-1 me-5">
+                <Tooltip title="Acessar perfil">
+                  <IconButton
+                    onClick={handleClick}
+                    size="small"
+                    sx={{ ml: 2 }}
+                    aria-controls={open ? "account-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                  >
+                    {photo ? (
+                      <>
+                        <Avatar sx={{ width: 32, height: 32 }}>
+                          <img
+                            src={photo}
+                            alt="imagem de um avatar"
+                            width="100%"
+                            height="100%"
+                          />
+                        </Avatar>
+                        <p className="mt-1 ms-3">{session.username}</p>
+                      </>
+                    ) : (
+                      <p>P</p>
+                    )}
+                  </IconButton>
+                </Tooltip>
+              </Box>
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    marginRight: "200px",
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1
+                    },
+                    "&:before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0
+                    }
+                  }
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <MenuItem onClick={handleProfile}>
+                  {photo ? (
+                    <Avatar sx={{ width: 32, height: 32 }}>
+                      <img
+                        src={photo}
+                        alt="imagem de um avatar"
+                        width="100%"
+                        height="100%"
+                      />
+                    </Avatar>
+                  ) : (
+                    <p>P</p>
+                  )}
+                  Meu perfil
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={signOut}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Sair
+                </MenuItem>
+              </Menu>
+            </S.MenuAvatar>
+          </>
         ) : (
           <S.AuthToggle>
             <a href="/login">

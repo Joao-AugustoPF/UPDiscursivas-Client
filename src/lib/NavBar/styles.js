@@ -11,6 +11,8 @@ export const MenuToggle = styled.div`
 export const MenuImageToggle = styled.div`
   width: 60px;
   height: 60px;
+  padding: 5px;
+  //margin-top: 5px;
   @media (max-width: 991px) {
   }
 `;
@@ -26,13 +28,27 @@ export const ToggleAuthOff = styled.div`
 export const ContainerOusite = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   background-color: #f8f9fa;
+`;
+
+export const LateralMenu = styled.div`
+  display: none;
+  @media (max-width: 991px) {
+    display: block;
+  }
 `;
 
 export const AuthToggle = styled.div`
   display: flex;
   margin-top: 20px;
+  @media (max-width: 991px) {
+    display: none;
+  }
+`;
+
+export const MenuAvatar = styled.div`
   @media (max-width: 991px) {
     display: none;
   }

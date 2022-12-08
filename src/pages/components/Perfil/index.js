@@ -85,7 +85,7 @@ export default function Perfil({ session }) {
           }
         }
       );
-      const billing = session.billingID;
+      const billing = session?.billingID;
 
       //Gets the user information based on your billingID
       const data = await graphcms.request(QueryUser, { billing });
