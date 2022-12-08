@@ -53,3 +53,17 @@ export const MenuAvatar = styled.div`
     display: none;
   }
 `;
+
+export const NavMenu = styled.div`
+  display: flex;
+  list-style: none;
+  text-decoration: none;
+`;
+
+export const NavMenuList = styled.div`
+  display: flex;
+  margin-left: 15px;
+  @media (max-width: 991px) {
+    display: none;
+  }
+`;

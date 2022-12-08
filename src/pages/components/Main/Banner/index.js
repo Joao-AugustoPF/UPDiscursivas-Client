@@ -1,7 +1,6 @@
 import React from "react";
 import Img from "next/image";
 import * as S from "../../../../lib/Main/Banner/styles";
-import Link from "next/link";
 import hero from "../../../../../public/img/hero-bg.png";
 
 import Man from "../../../../../public/img/working-computer_7496-1423.png";
@@ -20,12 +19,8 @@ export const Banner = () => {
                 <S.TextDescription>
                   Lorem ipsum dolor sit amet, consectetur
                 </S.TextDescription>
-                <S.LeftInsideButton>
-                  <Link href="/assinaturas" passHref target="_blank">
-                    <button type="button" className="btn btn-info">
-                      Ver planos
-                    </button>
-                  </Link>
+                <S.LeftInsideButton type="button" href="/assinaturas">
+                  Ver planos
                 </S.LeftInsideButton>
               </S.LeftInsideTextUpper>
             </S.LeftBasement>

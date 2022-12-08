@@ -17,7 +17,6 @@ import Image from "next/image";
 import * as S from "../../../lib/NavBar/styles";
 import { useEffect, useState } from "react";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { QueryUser } from "../../../graphql/queries/user";
 import { MutationRegisterTrial } from "../../../graphql/mutations/registerBilling";
@@ -127,11 +126,65 @@ export default function ResponsiveExample() {
   return (
     <>
       <S.ContainerOusite>
-        <S.MenuImageToggle>
-          <a href="/" className="ms-5">
-            <Image src={Logo} width="100" height="100" />
-          </a>
-        </S.MenuImageToggle>
+        <S.NavMenu>
+          <S.MenuImageToggle>
+            <a href="/" className="ms-5">
+              <Image src={Logo} width="100" height="100" />
+            </a>
+          </S.MenuImageToggle>
+          <S.NavMenuList>
+            <ul className="navbar ms-5 list-inline">
+              <li className="nav-item mx-1 mt-2">
+                <a
+                  className="text-decoration-none"
+                  style={{
+                    fontWeight: "500",
+                    color: "#d10d35"
+                  }}
+                  href="/assinaturas"
+                >
+                  Assinar
+                </a>
+              </li>
+              <li className="nav-item mx-1 mt-2">
+                <a
+                  href="/provas"
+                  className="navlink text-decoration-none"
+                  style={{
+                    fontWeight: "500",
+                    color: "#d10d35"
+                  }}
+                >
+                  Provas
+                </a>
+              </li>
+              <li className="nav-item mx-1 mt-2">
+                <a
+                  href="/questoes"
+                  className="navlink text-decoration-none"
+                  style={{
+                    fontWeight: "500",
+                    color: "#d10d35"
+                  }}
+                >
+                  Questões
+                </a>
+              </li>
+              <li className="nav-item mx-1 mt-2">
+                <a
+                  className="text-decoration-none"
+                  style={{
+                    fontWeight: "500",
+                    color: "#d10d35"
+                  }}
+                  href="/sobre"
+                >
+                  Sobre
+                </a>
+              </li>
+            </ul>
+          </S.NavMenuList>
+        </S.NavMenu>
         <S.LateralMenu>
           <Offcanvas show={show} onHide={handleCloseMenu} responsive="lg">
             <Offcanvas.Header closeButton>
