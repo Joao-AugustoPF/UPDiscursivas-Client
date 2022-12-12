@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { QueryProvas } from "../graphql/queries/provas";
 import { initializeApollo } from "../utils/apollo";
 import { MenuItem, Select } from "@mui/material";
+import * as S from "../lib/Provas/styles";
 import Link from "next/link";
 import protectedRoutes from "../utils/protectedRoutes";
 
@@ -169,8 +170,8 @@ export default function Provas({ session, provas }) {
               />
             </div>
 
-            <div className="d-flex w-100 p-4 justify-content-center align-items-center">
-              <div className="">
+            <S.WrapMenu>
+              <div>
                 <div className="d-flex flex-column justify-content-center align-items-center mx-4">
                   <label>Nome da prova:</label>
                   <Select
@@ -325,7 +326,7 @@ export default function Provas({ session, provas }) {
                   </Select>
                 </div>
               </div>
-            </div>
+            </S.WrapMenu>
           </div>
 
           {initialPosts

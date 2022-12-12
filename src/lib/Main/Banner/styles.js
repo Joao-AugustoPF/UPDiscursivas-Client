@@ -9,9 +9,9 @@ export const BannerContainer = styled.div`
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: right top;
+  padding: 40px;
   @media (max-width: 990px) {
     display: flex;
-    padding: 100px;
     justify-content: center;
     align-items: flex-start;
     text-align: center;
@@ -19,33 +19,27 @@ export const BannerContainer = styled.div`
 `;
 
 export const BannerContainerLeft = styled.div`
-  /* width: 50%;
+  display: flex;
+  width: 50%;
+  flex-direction: row;
   margin: auto;
+
   @media (max-width: 990px) {
     width: 100%;
-    display: flex;
-    flex-direction: column; 
-  }*/
+    margin: auto;
+  }
 `;
 
 export const ContainerAll = styled.div`
-  /* display: flex;
+  display: flex;
   width: 80%;
   margin: auto;
+  text-align: center;
+  /* 
   @media (max-width: 990px) {
     width: 100%;
     height: 500px;
     flex-direction: column;
-  } */
-`;
-
-export const BannerContainerRight = styled.div`
-  /* width: 50%;
-  margin: auto;
-  @media (max-width: 990px) {
-    width: 400px;
-    flex-direction: column;
-    margin-top: -450px;
   } */
 `;
 
@@ -88,7 +82,7 @@ export const LeftInsideButton = styled.a`
   text-align: center;
   text-decoration: none #000000 solid;
   text-decoration-thickness: auto;
-  width: 100%;
+  width: 50%;
   max-width: 460px;
   position: relative;
   cursor: pointer;
@@ -136,16 +130,4 @@ export const TextDescription = styled.h2`
   margin-top: 15px;
   margin-bottom: 25px;
   font-size: 17px;
-`;
-
-export const RightBasement = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 800px; */
-
-  @media (max-width: 990px) {
-    display: none;
-  }
 `;

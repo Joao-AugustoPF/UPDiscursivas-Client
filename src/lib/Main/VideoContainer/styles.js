@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const InsideContainer = styled.div`
   display: flex;
   width: 80%;
-  padding: 6%;
+  padding: 3%;
   text-align: center;
   flex-direction: column;
   margin: auto;
@@ -23,6 +23,7 @@ export const ContainerVideo = styled.div`
   margin-top: 5%;
 
   @media (max-width: 768px) {
-    width: 80%;
+    width: 100%;
+    height: 300px;
   }
 `;

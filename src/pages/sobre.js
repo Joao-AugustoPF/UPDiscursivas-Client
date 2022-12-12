@@ -78,7 +78,7 @@ const About = () => {
         <h1>Contato</h1>
       </div>
 
-      <div className="w-50">
+      <div className="w-100">
         <form
           className="d-flex flex-column justify-content-center align-items-center"
           ref={form}

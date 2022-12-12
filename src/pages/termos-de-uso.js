@@ -1,12 +1,12 @@
-import Link from "next/link";
 import React, { Component } from "react";
 import ReadMore from "./components/ReadMore";
+import * as S from "../lib/Terms/styles";
 
 //Terms of use Page
 class Termos extends Component {
   render() {
     return (
-      <div className="p-5 w-75 m-auto">
+      <S.WrapMenu>
         <div className="d-flex justify-items-center align-items-center flex-column">
           <h1>UP Discursivas</h1>
 
@@ -53,11 +53,7 @@ class Termos extends Component {
             Dessa forma, é aconselhável verificar periodicamente os termos de
             uso quanto a atualizações ou alterações que possam afetá-lo. Além
             disso, o usuário pode rever a versão atual dos termos de uso a
-            qualquer momento em (
-            <Link href="/termos-de-uso">
-              www.updiscursiva.com.br/termos-de-uso
-            </Link>
-            ).{" "}
+            qualquer momento em www.updiscursiva.com.br/ termos-de-uso
           </h4>
 
           <h4>
@@ -679,7 +675,7 @@ class Termos extends Component {
             submeter ao foro de seu domicílio.
           </ReadMore>
         </div>
-      </div>
+      </S.WrapMenu>
     );
   }
 }

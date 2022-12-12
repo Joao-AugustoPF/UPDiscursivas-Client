@@ -17,7 +17,7 @@ const Assinaturas = () => {
     const stripe = await getStripe();
     //this sends a 'link' to the backend and it returns the id that can be used in Stripe Payment to get a payment
     const checkoutSession = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/create-stripe-session/?keyword=${param}&customerid=${session.billingID}`
+      `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/create-stripe-session/?keyword=${param}&customerid=${session.billingID}`
     );
 
     const result = await stripe.redirectToCheckout({

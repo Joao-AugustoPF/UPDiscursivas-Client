@@ -8,10 +8,10 @@ export const VideoContainer = () => {
       <S.Container>
         <S.InsideContainer>
           <h2>Como usar nossa plataforma</h2>
-          <h4>
+          <p>
             Siga as intruções do vídeo para entender o funcionamento da
             plataforma UP Discursivas
-          </h4>
+          </p>
 
           <S.ContainerVideo>
             <iframe

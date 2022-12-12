@@ -128,7 +128,7 @@ export default function ResponsiveExample() {
       <S.ContainerOusite>
         <S.NavMenu>
           <S.MenuImageToggle>
-            <a href="/" className="ms-5">
+            <a href="/" className="ms-3">
               <Image src={Logo} width="100" height="100" />
             </a>
           </S.MenuImageToggle>

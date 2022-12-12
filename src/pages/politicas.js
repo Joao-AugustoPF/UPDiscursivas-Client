@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import * as S from "../lib/Terms/styles";
 
 //Page of politics
 class Politicas extends Component {
   render() {
     return (
-      <div className="p-5 w-75 m-auto mb-5">
+      <S.WrapMenu>
         <div className="d-flex justify-items-center align-items-center flex-column">
           <h1>UP Discursivas</h1>
 
@@ -76,7 +77,7 @@ class Politicas extends Component {
             interação conosco.
           </h5>
         </div>
-      </div>
+      </S.WrapMenu>
     );
   }
 }
