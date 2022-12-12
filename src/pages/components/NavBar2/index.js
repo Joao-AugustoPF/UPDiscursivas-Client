@@ -44,6 +44,7 @@ export default function ResponsiveExample() {
 
   const handleProfile = () => {
     handleClose();
+    handleCloseMenu();
     navigate.push("/perfil");
   };
 
