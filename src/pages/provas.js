@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useEffect, useState } from "react";
 import { QueryProvas } from "../graphql/queries/provas";
 import { initializeApollo } from "../utils/apollo";
@@ -5,6 +6,7 @@ import { MenuItem, Select } from "@mui/material";
 import * as S from "../lib/Provas/styles";
 import Link from "next/link";
 import protectedRoutes from "../utils/protectedRoutes";
+//import axios from "axios";
 
 export default function Provas({ session, provas }) {
   const [yrn, setYrn] = useState();
@@ -145,7 +147,7 @@ export default function Provas({ session, provas }) {
   //---------------
 
   useEffect(() => {
-    console.log(session);
+    //value();
   }, [session]);
 
   return (

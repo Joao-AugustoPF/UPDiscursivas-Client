@@ -141,9 +141,7 @@ export default function Questões({ session, provas }) {
   };
   //---------------
 
-  useEffect(() => {
-    console.log(session);
-  }, [session]);
+  useEffect(() => {}, [session]);
 
   return (
     <div className=" w-100">

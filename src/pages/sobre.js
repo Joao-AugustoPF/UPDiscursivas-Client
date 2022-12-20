@@ -9,7 +9,6 @@ const About = () => {
   const form = useRef();
   const sendEmail = (e) => {
     e.preventDefault();
-    console.log(process.env.NEXT_PUBLIC_SERVICE_EMAIL);
     //This's how the email from about page is sent
     emailjs
       .sendForm(

@@ -58,7 +58,7 @@ export const authOptions = {
       if (isSignIn) {
         token.id = user.id;
         token.username = user.username;
-        token.photo = user.photo;
+        token.phot = user.photo;
         token.jwt = user.jwt;
         token.plan = user.plan;
         token.hasTrial = user.hasTrial;

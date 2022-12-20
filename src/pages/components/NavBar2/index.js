@@ -112,7 +112,7 @@ export default function ResponsiveExample() {
       ) {
         //Sets the photo to UseState which is then used in the frontend
         setPhoto(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}${data?.usersPermissionsUsers.data[0]?.attributes?.photo?.data?.attributes?.url}`
+          `${data?.usersPermissionsUsers.data[0]?.attributes?.photo?.data?.attributes?.url}`
         );
         //---------------------------------------------
         return;

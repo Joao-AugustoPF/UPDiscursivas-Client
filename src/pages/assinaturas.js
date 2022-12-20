@@ -30,7 +30,6 @@ const Assinaturas = () => {
     }
     setLoading(false);
   };
-  console.log(session);
 
   return (
     <>
