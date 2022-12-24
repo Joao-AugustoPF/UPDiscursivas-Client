@@ -98,10 +98,11 @@ export const Register = () => {
         variables: {
           id: user.data.register.user.id,
           data: {
-            billingID: customerInfo.data.customer.id
+            billingID: customerInfo.customer.id
           }
         }
       });
+      console.log(customerInfo);
       console.log(userBilling);
     } catch (error) {
       return;
