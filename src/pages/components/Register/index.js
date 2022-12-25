@@ -109,6 +109,7 @@ export const Register = () => {
       console.log(customerInfo);
       console.log(userBilling);
     } catch (error) {
+      console.log(error);
       return;
     }
   };
