@@ -5,6 +5,8 @@ import axios from "axios";
 import { useMutation } from "@apollo/client";
 import { MutationSetPhoto } from "../../../graphql/mutations/user";
 import { QueryUser } from "../../../graphql/queries/user";
+// import { MutationRegister } from "../../../graphql/mutations/register";
+import { MutationRegisterBilling } from "../../../graphql/mutations/registerBilling";
 import { GraphQLClient } from "graphql-request";
 import Link from "next/link";
 
@@ -15,6 +17,12 @@ export default function Perfil({ session }) {
   const [files, setFiles] = useState();
   const [photo, setPhoto] = useState();
   const [dataUser, setDataUser] = useState();
+
+  // const [createUser, { error }] = useMutation(MutationRegister, {
+  //   onError: () => setformError("Usuário ou Email em uso.")
+  // });
+
+  const [createUserBilling] = useMutation(MutationRegisterBilling);
 
   const uploadImage = async (e) => {
     e.preventDefault();
@@ -71,9 +79,45 @@ export default function Perfil({ session }) {
       });
     //-----------------------------------
   };
+  const createUseri = async () => {
+    // const customerInfo = await axios.get(
+    //   `http://localhost:3000/api/customerstripe/?email=johngamerpf@gmail.com&name=JohnPF`,
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${session?.jwt}`
+    //     }
+    //   }
+    // );
+
+    // console.log(typeof customerInfo.data.customer.id);
+
+    // const user = await createUser({
+    //   variables: {
+    //     input: {
+    //       username: "John",
+    //       email: "johngamerpf@gmail.com",
+    //       password: "JeM232776"
+    //     }
+    //   }
+    // });
+    // console.log(typeof user.data.register.user.id);
+
+    const userBilling = await createUserBilling({
+      variables: {
+        id: "18",
+        data: {
+          billingID: "teste"
+        }
+      }
+    });
+
+    console.log(userBilling);
+  };
 
   useEffect(() => {
     if (!session) router.push("/login");
+
+    console.log(session);
 
     const handleImg = async () => {
       //Why use GraphQLClient instead of Apollo? As we have the protected routes, the apollo query wasn't returning properly. So we had to use graphql-request with the headers
@@ -167,6 +211,8 @@ export default function Perfil({ session }) {
                       </Link>
                     </div>
                   </div>
+
+                  <button onClick={createUseri}>Create user</button>
                 </>
               )}
             </div>
