@@ -113,6 +113,8 @@ export const Register = () => {
       });
 
       console.log(data);
+
+      console.log(session);
     } catch (error) {
       console.log(error);
       return;
