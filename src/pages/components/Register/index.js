@@ -78,6 +78,7 @@ export const Register = () => {
     try {
       const customerInfo = await axios.post(
         `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/customerstripe/?email=${values.email.target.value}&name=${values.username.target.value}`,
+        _,
         {
           headers: {
             Authorization: `Bearer ${session?.jwt}`
