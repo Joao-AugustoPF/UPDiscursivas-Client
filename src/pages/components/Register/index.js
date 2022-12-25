@@ -76,9 +76,8 @@ export const Register = () => {
 
     //Gets the user info that was created before
     try {
-      const customerInfo = await axios.post(
+      const customerInfo = await axios.get(
         `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/customerstripe/?email=${values.email.target.value}&name=${values.username.target.value}`,
-        _,
         {
           headers: {
             Authorization: `Bearer ${session?.jwt}`
