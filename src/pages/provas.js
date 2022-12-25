@@ -6,7 +6,6 @@ import { MenuItem, Select } from "@mui/material";
 import * as S from "../lib/Provas/styles";
 import Link from "next/link";
 import protectedRoutes from "../utils/protectedRoutes";
-//import axios from "axios";
 
 export default function Provas({ session, provas }) {
   const [yrn, setYrn] = useState();

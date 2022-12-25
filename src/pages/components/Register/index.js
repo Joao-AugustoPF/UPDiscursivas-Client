@@ -53,8 +53,6 @@ export const Register = () => {
     event.preventDefault();
     setformError("");
 
-    let customerInfo = {};
-
     //Checks if the length of the password is < 6
     if (values.password.target.value.length < 6) {
       setLengthpassword(true);
@@ -78,8 +76,13 @@ export const Register = () => {
 
     //Gets the user info that was created before
     try {
-      customerInfo = await axios.post(
-        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/customerstripe/?email=${values.email.target.value}&name=${values.username.target.value}`
+      const customerInfo = await axios.post(
+        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/customerstripe/?email=${values.email.target.value}&name=${values.username.target.value}`,
+        {
+          headers: {
+            Authorization: `Bearer ${session?.jwt}`
+          }
+        }
       );
 
       //Creates the user in the backend
@@ -98,7 +101,7 @@ export const Register = () => {
         variables: {
           id: user.data.register.user.id,
           data: {
-            billingID: customerInfo.customer.id
+            billingID: customerInfo.data.customer.id
           }
         }
       });
