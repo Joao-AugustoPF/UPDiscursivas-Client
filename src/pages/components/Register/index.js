@@ -10,6 +10,7 @@ import { MutationRegisterBilling } from "../../../graphql/mutations/registerBill
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import { signUpValidate } from "../../../utils/validations";
+import { GraphQLClient } from "graphql-request";
 
 //Register Page
 
@@ -47,7 +48,6 @@ export const Register = () => {
         });
     }
   });
-  const [createUserBilling] = useMutation(MutationRegisterBilling);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -97,15 +97,22 @@ export const Register = () => {
       });
 
       //Creates the user billingID in the backend. Why not use the same function to creates the user parameters? The function createUser from GraphQL doesn't support new entries than the default ones
-      const userBilling = await createUserBilling({
-        variables: {
-          id: user.data.register.user.id,
-          data: {
-            billingID: customerInfo.data.customer.id
+
+      const graphcms = new GraphQLClient(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+        {
+          headers: {
+            Authorization: `Bearer ${session?.jwt}`
           }
         }
+      );
+
+      const data = await graphcms.request(MutationRegisterBilling, {
+        id: user.data.register.user.id,
+        data: { billingID: customerInfo.data.customer.id }
       });
-      console.log(userBilling);
+
+      console.log(data);
     } catch (error) {
       console.log(error);
       return;
