@@ -31,11 +31,6 @@ export const Register = () => {
     confirm_password: { target: "" }
   });
 
-  //Session of user
-  const router = useRouter();
-
-  const { data: session } = useSession();
-
   //Creates the user in the backend
   const [createUser, { error }] = useMutation(MutationRegister, {
     onError: () => setformError("Usuário ou Email em uso."),
@@ -48,6 +43,11 @@ export const Register = () => {
         });
     }
   });
+
+  //Session of user
+  const router = useRouter();
+
+  const { data: session } = useSession();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
