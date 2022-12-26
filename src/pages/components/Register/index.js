@@ -124,9 +124,9 @@ export const Register = () => {
   };
 
   useEffect(() => {
-    // if (session) {
-    //   router.push("/perfil");
-    // }
+    if (session) {
+      router.push("/perfil");
+    }
   }, [session, router]);
 
   return (
