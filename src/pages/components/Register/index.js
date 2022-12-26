@@ -41,11 +41,11 @@ export const Register = () => {
     onError: () => setformError("Usuário ou Email em uso."),
     onCompleted: () => {
       //If all succeeds it makes the sign-in
-      // !error &&
-      //   signIn("credentials", {
-      //     email: values.email.target.value,
-      //     password: values.password.target.value
-      //   });
+      !error &&
+        signIn("credentials", {
+          email: values.email.target.value,
+          password: values.password.target.value
+        });
     }
   });
 
