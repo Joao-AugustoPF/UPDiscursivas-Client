@@ -30,7 +30,7 @@ export const TeamContainer = () => {
                   </a>
                 </S.BoxProdutorImage>
                 <S.ProdutorInfo>
-                  <S.TitleName>Antônio E. Fagundes</S.TitleName>
+                  <S.TitleName>Antonio E. Fagundes</S.TitleName>
                   <S.TitleFunction>Produtor principal</S.TitleFunction>
                 </S.ProdutorInfo>
               </S.ContainerGrid>

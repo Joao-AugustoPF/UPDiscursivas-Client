@@ -31,23 +31,23 @@ export const Register = () => {
     confirm_password: { target: "" }
   });
 
+  //Session of user
+  const router = useRouter();
+
+  const { data: session } = useSession();
+
   //Creates the user in the backend
   const [createUser, { error }] = useMutation(MutationRegister, {
     onError: () => setformError("Usuário ou Email em uso."),
     onCompleted: () => {
       //If all succeeds it makes the sign-in
-      !error &&
-        signIn("credentials", {
-          email: values.email.target.value,
-          password: values.password.target.value
-        });
+      // !error &&
+      //   signIn("credentials", {
+      //     email: values.email.target.value,
+      //     password: values.password.target.value
+      //   });
     }
   });
-
-  //Session of user
-  const router = useRouter();
-
-  const { data: session } = useSession();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -76,15 +76,6 @@ export const Register = () => {
 
     //Gets the user info that was created before
     try {
-      const customerInfo = await axios.get(
-        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/customerstripe/?email=${values.email.target.value}&name=${values.username.target.value}`,
-        {
-          headers: {
-            Authorization: `Bearer ${session?.jwt}`
-          }
-        }
-      );
-
       //Creates the user in the backend
       const user = await createUser({
         variables: {
@@ -96,25 +87,31 @@ export const Register = () => {
         }
       });
 
+      const customerInfo = await axios.get(
+        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/customerstripe/?email=${values.email.target.value}&name=${values.username.target.value}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user?.data?.register?.jwt}`
+          }
+        }
+      );
       //Creates the user billingID in the backend. Why not use the same function to creates the user parameters? The function createUser from GraphQL doesn't support new entries than the default ones
 
       const graphcms = new GraphQLClient(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
         {
           headers: {
-            Authorization: `Bearer ${session?.jwt}`
+            Authorization: `Bearer ${user?.data?.register?.jwt}`
           }
         }
       );
 
       const data = await graphcms.request(MutationRegisterBilling, {
-        id: user.data.register.user.id,
-        data: { billingID: customerInfo.data.customer.id }
+        id: user?.data?.register?.user?.id,
+        data: { billingID: customerInfo?.data?.customer?.id }
       });
 
       console.log(data);
-
-      console.log(session);
     } catch (error) {
       console.log(error);
       return;
@@ -127,9 +124,9 @@ export const Register = () => {
   };
 
   useEffect(() => {
-    if (session) {
-      router.push("/perfil");
-    }
+    // if (session) {
+    //   router.push("/perfil");
+    // }
   }, [session, router]);
 
   return (
