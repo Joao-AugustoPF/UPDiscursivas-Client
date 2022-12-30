@@ -15,7 +15,7 @@ function createApolloClient(session) {
     return {
       headers: {
         ...headers,
-        Authorization: session?.jwt ? `Bearer ${session?.jwt}` : ""
+        authorization: session?.jwt ? `Bearer ${session?.jwt}` : ""
       }
     };
   });

@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-import { useMutation } from "@apollo/client";
 import Logout from "@mui/icons-material/Logout";
 import {
   Avatar,
@@ -22,6 +21,7 @@ import { QueryUser } from "../../../graphql/queries/user";
 import { MutationRegisterTrial } from "../../../graphql/mutations/registerBilling";
 import Logo from "../../../../public/img/logo.png";
 import { useRouter } from "next/router";
+import { useMutation } from "@apollo/client";
 
 export default function ResponsiveExample() {
   const [show, setShow] = useState(false);
@@ -48,7 +48,6 @@ export default function ResponsiveExample() {
     navigate.push("/perfil");
   };
 
-  const [createRegisterTrial] = useMutation(MutationRegisterTrial);
 
   useEffect(() => {
     //Check if has active plan
@@ -62,18 +61,28 @@ export default function ResponsiveExample() {
       if (session) {
         if (isTrialExpired) {
           console.log("trial expired");
-
+          if(!session.endDate){
+            return
+          }
           //If the trial is expired this function removes the user's permissions
-          await createRegisterTrial({
-            variables: {
-              id: session.id,
-              data: {
-                hasTrial: false,
-                plan: null,
-                endDate: null
+
+          const graphcms = new GraphQLClient(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+            {
+              headers: {
+                Authorization: `Bearer ${session?.jwt}`
               }
             }
+          );
+
+          
+          const userData = await graphcms.request(MutationRegisterTrial, {
+            id: session?.id,
+            data: {hasTrial: false,
+              plan: null,
+              endDate: null}
           });
+
           //---------------------------------------------
         } else {
           //Just a console log to know if the user has trial information and if the date is correct
@@ -122,7 +131,7 @@ export default function ResponsiveExample() {
       handleImg();
       isActive();
     }
-  }, [session, createRegisterTrial]);
+  }, [session]);
 
   return (
     <>

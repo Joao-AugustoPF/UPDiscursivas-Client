@@ -2,10 +2,10 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useMutation } from "@apollo/client";
 import { MutationSetPhoto } from "../../../graphql/mutations/user";
 import { QueryUser } from "../../../graphql/queries/user";
 import { GraphQLClient } from "graphql-request";
+import { useMutation } from "@apollo/client";
 import Link from "next/link";
 
 export default function Perfil({ session }) {
@@ -18,6 +18,15 @@ export default function Perfil({ session }) {
 
   const uploadImage = async (e) => {
     e.preventDefault();
+
+    const graphcms = new GraphQLClient(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+      {
+        headers: {
+          Authorization: `Bearer ${session?.jwt}`
+        }
+      }
+    );
 
     //Creates a form data to set the photo to backend.
     const formData = new FormData();
@@ -56,14 +65,10 @@ export default function Perfil({ session }) {
         }
       })
       .then(async (response) => {
-        await setUserPhoto({
-          variables: {
-            id: session.id,
-            data: {
-              photo: `${response.data[0].id}`
-            }
-          }
-        });
+        await graphcms.request(MutationSetPhoto, { id: session.id,
+          data: {
+            photo: `${response.data[0].id}`
+          } });
         window.location.reload();
       })
       .catch((error) => {
