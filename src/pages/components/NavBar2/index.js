@@ -59,9 +59,7 @@ export default function ResponsiveExample() {
       if (session) {
         if (isTrialExpired) {
           console.log("trial expired");
-          if(!session.endDate){
-            return
-          }
+          if(!session.endDate) return
           //If the trial is expired this function removes the user's permissions
 
           const graphcms = new GraphQLClient(
@@ -73,12 +71,9 @@ export default function ResponsiveExample() {
             }
           );
 
-          
-          const userData = await graphcms.request(MutationRegisterTrial, {
+          await graphcms.request(MutationRegisterTrial, {
             id: session?.id,
-            data: {hasTrial: false,
-              plan: null,
-              endDate: null}
+            data: { hasTrial: false, plan: null, endDate: null }
           });
 
           //---------------------------------------------
