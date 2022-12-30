@@ -21,7 +21,6 @@ import { QueryUser } from "../../../graphql/queries/user";
 import { MutationRegisterTrial } from "../../../graphql/mutations/registerBilling";
 import Logo from "../../../../public/img/logo.png";
 import { useRouter } from "next/router";
-import { useMutation } from "@apollo/client";
 
 export default function ResponsiveExample() {
   const [show, setShow] = useState(false);
@@ -47,7 +46,6 @@ export default function ResponsiveExample() {
     handleCloseMenu();
     navigate.push("/perfil");
   };
-
 
   useEffect(() => {
     //Check if has active plan
