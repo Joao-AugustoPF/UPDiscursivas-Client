@@ -7,9 +7,9 @@ async function CreateStripeSession(req, res) {
 	} = req;
 	let param = "";
 	if (keyword === "mensal") {
-		param = process.env.NEXT_PUBLIC_PLAN_STRIPE;
+		param = process.env.NEXT_PUBLIC_MENSAL_STRIPE;
 	} else if (keyword === "trimestral") {
-		param = process.env.NEXT_PUBLIC_PRICE_STRIPE;
+		param = process.env.NEXT_PUBLIC_TRIMESTRAL_STRIPE;
 	}
 	const session = await stripe.checkout.sessions.create({
 		customer: customerid,
