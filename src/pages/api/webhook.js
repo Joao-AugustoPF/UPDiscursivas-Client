@@ -10,6 +10,17 @@ export const config = {
 	}
 };
 
+const endpoint = await stripe.webhookEndpoints.create({
+  url: 'https://up-discursivas-client.vercel.app/api/webhook',
+  enabled_events: [
+    "payment_intent.succeeded",
+    "charge.customer.created",
+    "invoice.paid",
+    "customer.subscription.created",
+    "customer.subscription.updated",
+  ],
+});
+
 const QURI = gql`
     mutation MutationRegisterPlan($id: ID!, $data: UsersPermissionsUserInput!) {
         updateUsersPermissionsUser(id: $id, data: $data) {
