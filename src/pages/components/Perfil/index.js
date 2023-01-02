@@ -5,13 +5,11 @@ import axios from "axios";
 import { MutationSetPhoto } from "../../../graphql/mutations/user";
 import { QueryUser } from "../../../graphql/queries/user";
 import { GraphQLClient } from "graphql-request";
-import { useMutation } from "@apollo/client";
 import Link from "next/link";
 
 export default function Perfil({ session }) {
   const router = useRouter();
 
-  const [setUserPhoto] = useMutation(MutationSetPhoto);
   const [files, setFiles] = useState();
   const [photo, setPhoto] = useState();
   const [dataUser, setDataUser] = useState();
@@ -65,10 +63,12 @@ export default function Perfil({ session }) {
         }
       })
       .then(async (response) => {
-        await graphcms.request(MutationSetPhoto, { id: session.id,
+        await graphcms.request(MutationSetPhoto, {
+          id: session.id,
           data: {
             photo: `${response.data[0].id}`
-          } });
+          }
+        });
         window.location.reload();
       })
       .catch((error) => {
