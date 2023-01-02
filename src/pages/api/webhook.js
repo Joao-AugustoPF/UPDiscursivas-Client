@@ -83,13 +83,13 @@ async function Webhook(req, res) {
 		if (data.status === "paid") {
 			if (
 				data.lines.data[0].plan.id ===
-                    process.env.NEXT_PUBLIC_PLAN_STRIPE
+                    process.env.NEXT_PUBLIC_MENSAL_STRIPE
 			) {
 				typeSubscription = "mensal";
 			}
 			if (
 				data.lines.data[0].plan.id ===
-                    process.env.NEXT_PUBLIC_PRICE_STRIPE
+                    process.env.NEXT_PUBLIC_TRIMESTRAL_STRIPE
 			) {
 				typeSubscription = "trimestral";
 			}
@@ -121,12 +121,12 @@ async function Webhook(req, res) {
 	case "customer.subscription.updated": {
 		// started trial
 		let subscrpitionType = "";
-		if (data.plan.id === process.env.NEXT_PUBLIC_PLAN_STRIPE) {
+		if (data.plan.id === process.env.NEXT_PUBLIC_MENSAL_STRIPE) {
 			subscrpitionType = "mensal";
 			return;
 		}
 
-		if (data.plan.id === process.env.NEXT_PUBLIC_PRICE_STRIPE) {
+		if (data.plan.id === process.env.NEXT_PUBLIC_TRIMESTRAL_STRIPE) {
 			subscrpitionType = "trimestral";
 		}
 
