@@ -7,7 +7,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:react/jsx-runtime"
+        "plugin:react/jsx-runtime",
+        "plugin:prettier/recommended"
     ],
     "overrides": [
     ],
@@ -33,6 +34,9 @@
         ],
         "semi": [
             "error",
+            {
+              "endOfLine": "auto"
+            },
             "always"
         ],
         "no-mixed-spaces-and-tabs": 0,
