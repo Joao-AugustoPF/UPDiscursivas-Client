@@ -5,9 +5,9 @@ import axios from "axios";
 
 //Makes the sign-in
 export async function signIn({ email, password }) {
-  const res = await axios.post(`${strapiUrl}/api/auth/local`, {
-    identifier: email,
-    password
-  });
-  return res.data;
+	const res = await axios.post(`${strapiUrl}/api/auth/local`, {
+		identifier: email,
+		password
+	});
+	return res.data;
 }

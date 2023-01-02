@@ -35,7 +35,7 @@ export const ContainerAll = styled.div`
   width: 80%;
   margin: auto;
   text-align: center;
-  /* 
+  /*
   @media (max-width: 990px) {
     width: 100%;
     height: 500px;

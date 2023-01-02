@@ -5,11 +5,11 @@ import VideoContainer from "./VideoContainer";
 
 //Put all the container together in a single page
 const Main = () => (
-  <S.Wrapper>
-    <Banner />
-    <VideoContainer />
-    <TeamContainer />
-  </S.Wrapper>
+	<S.Wrapper>
+		<Banner />
+		<VideoContainer />
+		<TeamContainer />
+	</S.Wrapper>
 );
 
 export default Main;

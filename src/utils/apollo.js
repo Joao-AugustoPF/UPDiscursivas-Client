@@ -7,44 +7,44 @@ let apolloClient;
 
 //Set the apollo url to the correct URL
 function createApolloClient(session) {
-  const httpLink = new HttpLink({
-    uri: `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`
-  });
+	const httpLink = new HttpLink({
+		uri: `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`
+	});
 
-  const authLink = setContext((_, { headers }) => {
-    return {
-      headers: {
-        ...headers,
-        authorization: session?.jwt ? `Bearer ${session?.jwt}` : ""
-      }
-    };
-  });
+	const authLink = setContext((_, { headers }) => {
+		return {
+			headers: {
+				...headers,
+				authorization: session?.jwt ? `Bearer ${session?.jwt}` : ""
+			}
+		};
+	});
 
-  return new ApolloClient({
-    ssrMode: typeof window === "undefined",
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
-  });
+	return new ApolloClient({
+		ssrMode: typeof window === "undefined",
+		link: authLink.concat(httpLink),
+		cache: new InMemoryCache()
+	});
 }
 
 export function initializeApollo(initialState = {}, session) {
-  const apolloClientGlobal = apolloClient ?? createApolloClient(session);
+	const apolloClientGlobal = apolloClient ?? createApolloClient(session);
 
-  if (initialState) {
-    apolloClientGlobal.cache.restore(initialState);
-  }
+	if (initialState) {
+		apolloClientGlobal.cache.restore(initialState);
+	}
 
-  if (typeof window === "undefined") return apolloClientGlobal;
+	if (typeof window === "undefined") return apolloClientGlobal;
 
-  apolloClient = apolloClient ?? apolloClientGlobal;
+	apolloClient = apolloClient ?? apolloClientGlobal;
 
-  return apolloClient;
+	return apolloClient;
 }
 
 export function useApollo(initialState = {}, session) {
-  const store = useMemo(
-    () => initializeApollo(initialState, session),
-    [initialState, session]
-  );
-  return store;
+	const store = useMemo(
+		() => initializeApollo(initialState, session),
+		[initialState, session]
+	);
+	return store;
 }
